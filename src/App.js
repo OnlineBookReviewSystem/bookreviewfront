@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 
-const API_URL = "http://localhost:8080/api/reviews";
+const API_URL = `${process.env.REACT_APP_API_URL}/api/reviews`;
 
 function App() {
   const [page, setPage] = useState("create");
