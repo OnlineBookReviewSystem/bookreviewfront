@@ -62,6 +62,27 @@ Spring Boot backend processes requests and interacts with the database
 
 Docker is used to containerize both frontend and backend applications
 
+sonar-pr-check
+### `npm run build` success
+
+Creating an optimized production build...
+Compiled successfully.
+
+File sizes after gzip:
+
+  62.01 kB  build\static\js\main.2c8c985a.js
+  1.76 kB   build\static\js\453.0a977dce.chunk.js
+  792 B     build\static\css\main.489d9043.css
+
+The project was built assuming it is hosted at /.
+You can control this with the homepage field in your package.json.
+
+The build folder is ready to be deployed.
+You may serve it with a static server:
+
+  npm install -g serve
+  serve -s build
+
 Each service is deployed independently on cloud platforms
 
 This architecture improves maintainability, scalability, and real-world applicability.
@@ -153,4 +174,9 @@ Cloud deployment using Render and Vercel
 Code quality analysis using SonarCloud
 
 GitHub organization and collaboration workflow
+ main
 SonarCloud analysis integrated with Pull Request checks.
+## SonarCloud Pull Request Analysis
+
+SonarCloud is integrated with GitHub Actions and automatically analyzes code on every Pull Request.
+Quality gate results and code issues are visible directly in the Pull Request view.
