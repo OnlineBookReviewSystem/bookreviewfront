@@ -65,6 +65,23 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/a
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run build` fails to minify
+### `npm run build` success
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Creating an optimized production build...
+Compiled successfully.
+
+File sizes after gzip:
+
+  62.01 kB  build\static\js\main.2c8c985a.js
+  1.76 kB   build\static\js\453.0a977dce.chunk.js
+  792 B     build\static\css\main.489d9043.css
+
+The project was built assuming it is hosted at /.
+You can control this with the homepage field in your package.json.
+
+The build folder is ready to be deployed.
+You may serve it with a static server:
+
+  npm install -g serve
+  serve -s build
+SonarCloud analysis integrated with Pull Request checks.
