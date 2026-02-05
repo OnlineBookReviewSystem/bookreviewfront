@@ -10,22 +10,14 @@ This project was developed not only to meet functional requirements but also to 
 Why BookNest and Why This Architecture
 
 The BookNest application uses React for the frontend because React allows building reusable components, efficient state management, and smooth user interactions without reloading pages. This makes the application faster, more responsive, and easier to maintain compared to traditional multi-page applications.
-
 The frontend and backend are kept completely separate so that:
-
 The frontend can evolve independently without affecting backend logic
-
 The backend can be reused for other clients (mobile apps, future services, etc.)
-
 Deployment and scaling become easier
-
 Real-world enterprise architecture is followed
-
 The backend uses Spring Boot to expose REST APIs that handle review creation, updating, retrieval, and deletion. Communication between frontend and backend happens using HTTP requests, making the system loosely coupled and scalable.
-
 Technology Stack
 Frontend
-
 React (JavaScript)
 
 Component-based UI design
