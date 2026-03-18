@@ -135,6 +135,13 @@ function App() {
             <option>Fantasy</option>
             <option>Thriller</option>
             <option>Self-Help</option>
+            <option>Fiction</option>
+            <option>Mystery</option>
+            <option>Comedy</option>
+            <option>Horror</option>
+            <option>Crime</option>
+            <option>Adventure</option>
+            <option>Action</option>
           </select>
 
           <input
