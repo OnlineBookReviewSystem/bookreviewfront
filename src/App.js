@@ -86,7 +86,7 @@ function App() {
 
   // 🔹 DELETE
   const deleteBook = async (id) => {
-    if (!globalThis.confirm("Are you sure you want to delete this review?")) return;
+    if (!window.confirm("Are you sure you want to delete this review?")) return;
 
     try {
       const response = await fetch(`${API_URL}/${id}`, { method: "DELETE" });
