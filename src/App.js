@@ -7,7 +7,6 @@ function App() {
   const [page, setPage] = useState("create");
   const [books, setBooks] = useState([]);
   const [editId, setEditId] = useState(null);
-  const [searchTerm, setSearchTerm] = useState("");
 
   const [formData, setFormData] = useState({
     bookTitle: "",
@@ -33,12 +32,6 @@ function App() {
   useEffect(() => {
     fetchReviews();
   }, []);
-
-  const filteredBooks = books.filter(book => 
-    book.bookTitle.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    book.author.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    book.reviewText.toLowerCase().includes(searchTerm.toLowerCase())
-  );
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -166,21 +159,6 @@ function App() {
 
       {page === "view" && (
         <div className="list">
-          <input
-            type="text"
-            placeholder="Search reviews by title, author, or content..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            style={{
-              width: "100%",
-              padding: "10px",
-              marginBottom: "20px",
-              border: "1px solid #ccc",
-              borderRadius: "5px",
-              fontSize: "16px"
-            }}
-          />
-          
           <button 
             onClick={fetchReviews}
             style={{
@@ -196,10 +174,9 @@ function App() {
             🔄 Refresh Reviews
           </button>
           
-          {filteredBooks.length === 0 && books.length > 0 && <p>No reviews match your search.</p>}
           {books.length === 0 && <p className="empty">No reviews available</p>}
 
-          {filteredBooks.map((book) => (
+          {books.map((book) => (
             <div className="card" key={book.id}>
               <h3>{book.bookTitle}</h3>
               <p><b>Author:</b> {book.author}</p>
