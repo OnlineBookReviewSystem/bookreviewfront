@@ -113,5 +113,6 @@ I am prepared to explain all challenges faced during: Frontend–backend integra
 and how each issue was resolved.Frontend Build Screenshot
 
 Backend Build Screenshot
-Testing SonarCloud PR
-testing sonarcloud pr2
+
+<img width="1920" height="1080" alt="azuredeploy" src="https://github.com/user-attachments/assets/8511dde1-5b1a-4899-8833-a784a9e4099d" />
+
