@@ -115,4 +115,4 @@ and how each issue was resolved.Frontend Build Screenshot
 Backend Build Screenshot
 The application has been deployed in azure for both frontend and backend.
 <img width="1920" height="1080" alt="azuredeploy" src="https://github.com/user-attachments/assets/8511dde1-5b1a-4899-8833-a784a9e4099d" />
-
+Pull request sample
