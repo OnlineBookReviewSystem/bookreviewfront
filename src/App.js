@@ -15,6 +15,7 @@ function App() {
     rating: "",
     reviewText: ""
   });
+
   // 🔹 Load reviews from backend
   const fetchReviews = () => {
     fetch(API_URL)
@@ -57,7 +58,7 @@ function App() {
       if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
       console.log("Review submitted successfully");
-      
+
       // refresh list
       fetchReviews();
 
@@ -68,8 +69,10 @@ function App() {
         rating: "",
         reviewText: ""
       });
+
       setEditId(null);
       setPage("view");
+
       alert("Review submitted successfully!");
     } catch (error) {
       console.error("Error submitting review:", error);
@@ -89,11 +92,16 @@ function App() {
     if (!window.confirm("Are you sure you want to delete this review?")) return;
 
     try {
-      const response = await fetch(`${API_URL}/${id}`, { method: "DELETE" });
+      const response = await fetch(`${API_URL}/${id}`, {
+        method: "DELETE"
+      });
+
       if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-      
+
       console.log("Review deleted successfully");
+
       setBooks(books.filter((b) => b.id !== id));
+
       alert("Review deleted successfully!");
     } catch (error) {
       console.error("Error deleting review:", error);
@@ -128,7 +136,11 @@ function App() {
             onChange={handleChange}
           />
 
-          <select name="genre" value={formData.genre} onChange={handleChange}>
+          <select
+            name="genre"
+            value={formData.genre}
+            onChange={handleChange}
+          >
             <option value="">Select Genre</option>
             <option>Comics</option>
             <option>Romance</option>
@@ -166,7 +178,7 @@ function App() {
 
       {page === "view" && (
         <div className="list">
-          <button 
+          <button
             onClick={fetchReviews}
             style={{
               marginBottom: "20px",
@@ -180,8 +192,10 @@ function App() {
           >
             🔄 Refresh Reviews
           </button>
-          
-          {books.length === 0 && <p className="empty">No reviews available</p>}
+
+          {books.length === 0 && (
+            <p className="empty">No reviews available</p>
+          )}
 
           {books.map((book) => (
             <div className="card" key={book.id}>
@@ -192,8 +206,18 @@ function App() {
               <p className="review">{book.reviewText}</p>
 
               <div className="actions">
-                <button className="edit" onClick={() => editBook(book)}>Edit</button>
-                <button className="delete" onClick={() => deleteBook(book.id)}>Delete</button>
+                <button
+                  className="edit"
+                  onClick={() => editBook(book)}
+                >
+                  Edit
+                </button>
+                <button
+                  className="delete"
+                  onClick={() => deleteBook(book.id)}
+                >
+                  Delete
+                </button>
               </div>
             </div>
           ))}
