@@ -12,16 +12,21 @@ function App() {
     bookTitle: "",
     author: "",
     genre: "",
-    rating: 0,
+    rating: "",
     reviewText: ""
   });
-
-  // 🔹 Load reviews
+  // 🔹 Load reviews from backend
   const fetchReviews = () => {
     fetch(API_URL)
-      .then(res => res.json())
-      .then(data => setBooks(data))
-      .catch(err => console.error(err));
+      .then(res => {
+        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+        return res.json();
+      })
+      .then(data => {
+        console.log("Reviews fetched:", data);
+        setBooks(data);
+      })
+      .catch(error => console.error("Error fetching reviews:", error));
   };
 
   useEffect(() => {
@@ -32,12 +37,7 @@ function App() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // ⭐ STAR CLICK
-  const handleStarClick = (value) => {
-    setFormData({ ...formData, rating: value });
-  };
-
-  // 🔹 CREATE / UPDATE
+  // 🔹 CREATE or UPDATE
   const submitReview = async () => {
     if (!formData.bookTitle || !formData.author) {
       alert("Please fill in book title and author!");
@@ -48,26 +48,32 @@ function App() {
     const url = editId ? `${API_URL}/${editId}` : API_URL;
 
     try {
-      await fetch(url, {
+      const response = await fetch(url, {
         method,
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData)
       });
 
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+      console.log("Review submitted successfully");
+      
+      // refresh list
       fetchReviews();
 
       setFormData({
         bookTitle: "",
         author: "",
         genre: "",
-        rating: 0,
+        rating: "",
         reviewText: ""
       });
-
       setEditId(null);
       setPage("view");
-    } catch (err) {
-      console.error(err);
+      alert("Review submitted successfully!");
+    } catch (error) {
+      console.error("Error submitting review:", error);
+      alert("Failed to submit review: " + error.message);
     }
   };
 
@@ -80,8 +86,19 @@ function App() {
 
   // 🔹 DELETE
   const deleteBook = async (id) => {
-    await fetch(`${API_URL}/${id}`, { method: "DELETE" });
-    setBooks(books.filter((b) => b.id !== id));
+    if (!window.confirm("Are you sure you want to delete this review?")) return;
+
+    try {
+      const response = await fetch(`${API_URL}/${id}`, { method: "DELETE" });
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+      
+      console.log("Review deleted successfully");
+      setBooks(books.filter((b) => b.id !== id));
+      alert("Review deleted successfully!");
+    } catch (error) {
+      console.error("Error deleting review:", error);
+      alert("Failed to delete review: " + error.message);
+    }
   };
 
   return (
@@ -118,21 +135,21 @@ function App() {
             <option>Fantasy</option>
             <option>Thriller</option>
             <option>Self-Help</option>
-              
+            <option>Fiction</option>
+            <option>Mystery</option>
+            <option>Comedy</option>
+            <option>Horror</option>
+            <option>Crime</option>
+            <option>Adventure</option>
+            <option>Action</option>
           </select>
 
-          {/* ⭐ STAR RATING */}
-          <div className="star-rating">
-            {[1, 2, 3, 4, 5].map((star) => (
-              <span
-                key={star}
-                className={star <= formData.rating ? "star filled" : "star"}
-                onClick={() => handleStarClick(star)}
-              >
-                ★
-              </span>
-            ))}
-          </div>
+          <input
+            name="rating"
+            placeholder="Rating (1-5)"
+            value={formData.rating}
+            onChange={handleChange}
+          />
 
           <textarea
             name="reviewText"
@@ -149,6 +166,21 @@ function App() {
 
       {page === "view" && (
         <div className="list">
+          <button 
+            onClick={fetchReviews}
+            style={{
+              marginBottom: "20px",
+              padding: "10px 20px",
+              backgroundColor: "#4CAF50",
+              color: "white",
+              border: "none",
+              borderRadius: "5px",
+              cursor: "pointer"
+            }}
+          >
+            🔄 Refresh Reviews
+          </button>
+          
           {books.length === 0 && <p className="empty">No reviews available</p>}
 
           {books.map((book) => (
@@ -156,17 +188,7 @@ function App() {
               <h3>{book.bookTitle}</h3>
               <p><b>Author:</b> {book.author}</p>
               <p><b>Genre:</b> {book.genre}</p>
-
-              {/* ⭐ SHOW STARS */}
-              <p>
-                <b>Rating:</b>{" "}
-                {[1,2,3,4,5].map((i) => (
-                  <span key={i} className={i <= book.rating ? "star filled" : "star"}>
-                    ★
-                  </span>
-                ))}
-              </p>
-
+              <p><b>Rating:</b> ⭐ {book.rating}</p>
               <p className="review">{book.reviewText}</p>
 
               <div className="actions">
