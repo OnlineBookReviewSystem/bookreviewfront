@@ -1,0 +1,63 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+name: Build and deploy container app to Azure Web App - bookreview-frontend-app42
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read #This is required for actions/checkout
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Log in to container registry
+        uses: docker/login-action@v2
+        with:
+          registry: bookreviewacr42.azurecr.io/
+          username: ${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_BF4002FBE8A74F6B818F5575842C1A06 }}
+          password: ${{ secrets.AZUREAPPSERVICE_CONTAINERPASSWORD_6AAC28A7BB5F47938564BF04F974C940 }}
+
+      - name: Build and push container image to registry
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          push: true
+          tags: bookreviewacr42.azurecr.io/${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_BF4002FBE8A74F6B818F5575842C1A06 }}/bookreview-frontend:${{ github.sha }}
+          file: ./Dockerfile
+
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write #This is required for requesting the JWT
+      contents: read #This is required for actions/checkout
+
+    needs: build
+    
+    steps:
+      
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_D8159A0530874EE99B251BC3C9319459 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_F694C450010647F8BBB4FF8EC6A84CB4 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_A4A61649B42841B6B2B825EB2B69EEDD }}
+
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'bookreview-frontend-app42'
+          slot-name: 'Production'
+          images: 'bookreviewacr42.azurecr.io/${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_BF4002FBE8A74F6B818F5575842C1A06 }}/bookreview-frontend:${{ github.sha }}'
+          
