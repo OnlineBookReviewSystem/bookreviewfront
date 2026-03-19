@@ -110,9 +110,22 @@ I am ready to demonstrate this during the DevOps class.
 Explaining Challenges Faced
 I am prepared to explain all challenges faced during: Frontend–backend integration,CORS configuration,Dockerization,CI/CD pipeline setup,Cloud deployment,Domain and DNS configuration
 
-and how each issue was resolved.Frontend Build Screenshot
+and how each issue was resolved.
+Frontend Build Screenshot
+<img width="1920" height="1080" alt="frontend-build" src="https://github.com/user-attachments/assets/213f4db6-b6d9-4535-9cc2-7ced32738fc4" />
 
 Backend Build Screenshot
 The application has been deployed in azure for both frontend and backend.
 <img width="1920" height="1080" alt="azuredeploy" src="https://github.com/user-attachments/assets/8511dde1-5b1a-4899-8833-a784a9e4099d" />
+The frontend of the Online Book Review System was deployed using Microsoft Azure App Service. This service allows hosting web applications without managing servers or infrastructure.
 
+First, the React application was built using npm to generate the production-ready files. These files were then deployed to Azure App Service.
+
+Azure provides a public URL which can be used to access the application from anywhere. After making UI changes, the application was redeployed, and the updated version was successfully reflected in the new link.
+
+This method is simple and efficient for deploying frontend applications and does not require Docker.
+<img width="1919" height="863" alt="Screenshot 2026-03-19 212937" src="https://github.com/user-attachments/assets/765c07db-dedc-47c4-8961-f4520c1974b7" />
+<img width="1920" height="1080" alt="azuredeploy" src="https://github.com/user-attachments/assets/07f325fa-302d-4a43-9fd7-d15be81e93e7" />
+LINKS:
+APP SERVICE <--  https://bookreview-frontend-app42.azurewebsites.net/
+CONTAINER APPS <--  https://bookreview-frontend-container.calmsmoke-fe071420.southeastasia.azurecontainerapps.io/
