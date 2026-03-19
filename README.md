@@ -117,6 +117,8 @@ Frontend Build Screenshot
 Backend Build Screenshot
 The application has been deployed in azure for both frontend and backend.
 <img width="1920" height="1080" alt="azuredeploy" src="https://github.com/user-attachments/assets/8511dde1-5b1a-4899-8833-a784a9e4099d" />
+manashamin-patch-2
+Pull request sample
 The frontend of the Online Book Review System was deployed using Microsoft Azure App Service. This service allows hosting web applications without managing servers or infrastructure.
 
 First, the React application was built using npm to generate the production-ready files. These files were then deployed to Azure App Service.
@@ -129,3 +131,4 @@ This method is simple and efficient for deploying frontend applications and does
 LINKS:
 APP SERVICE <--  https://bookreview-frontend-app42.azurewebsites.net/
 CONTAINER APPS <--  https://bookreview-frontend-container.calmsmoke-fe071420.southeastasia.azurecontainerapps.io/
+main
