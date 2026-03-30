@@ -3,14 +3,11 @@ Summary (BookNest – Online Book Review System)
 This section summarizes the successful completion of all DevOps, CI/CD, and deployment-related tasks for the BookNest – Online Book Review System, a full-stack web application.
 
 Development – Frontend
-
 The frontend of the application was successfully developed using React (JavaScript).
 It provides a clean and user-friendly interface where users can:
-
 Add new book reviews
 View existing reviews
 Edit and delete reviews
-
 The frontend communicates with the backend using REST APIs and was tested thoroughly during development.
 
 Development – Backend
